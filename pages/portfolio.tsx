@@ -11,7 +11,7 @@ const portfolio = () => {
       subtitle="Next JS / Tailwind CSS"
       description={descriptions.portfolio.description}
       codeUrl="https://github.com/Suryac72/my-portfolio"
-      projectUrl="https://myblogger-react-app.surge.sh/"
+      projectUrl="https://surya-portfolio-xi.vercel.app/"
       technologies={["Next JS","React", "Tailwind CSS","Javascript"]}
     />
   </div>
