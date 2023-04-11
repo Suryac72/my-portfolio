@@ -18,7 +18,7 @@ const About = (aboutProps : AboutProps) => {
         <div className="col-span-2">
           <p className="uppercase text-xl tracking-widest text-[#5651e5]">{aboutProps.title}</p>
           <h2 className="py-4">{aboutProps.subtitle}</h2>
-          <p className="py-2 text-gray-600 font-Roboto-Slab">{aboutProps.innerSubTitle}</p>
+          <p className="py-2 text-gray-600">{aboutProps.innerSubTitle}</p>
           <p className="py-2 text-gray-700 text-justify">
             {aboutProps.description}
           </p>
