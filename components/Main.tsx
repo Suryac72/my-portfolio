@@ -32,7 +32,7 @@ const Main = (mainProps : MainProps) => {
           </p>
           <div className="flex items-center justify-between max-w-[330px] m-auto py-4">
             <a
-              href={mainProps.githubUrl}
+              href={mainProps.linkedInUrl}
               target="_blank"
               rel="noreferrer"
             >
