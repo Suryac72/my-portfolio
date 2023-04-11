@@ -10,7 +10,7 @@ const blog = () => {
         imageUrl={blogImage}
         subtitle="React / CSS"
         description={descriptions.blogs.description}
-        codeUrl="https://github.com/Suryac72/data-finance-frontend-project/tree/master"
+        codeUrl="https://github.com/Suryac72/blog-website"
         projectUrl="https://myblogger-react-app.surge.sh/"
         technologies={["React", "CSS","Javascript"]}
       />

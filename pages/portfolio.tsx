@@ -10,7 +10,7 @@ const portfolio = () => {
       imageUrl={portfolioImage}
       subtitle="Next JS / Tailwind CSS"
       description={descriptions.portfolio.description}
-      codeUrl="https://github.com/Suryac72/data-finance-frontend-project/tree/master"
+      codeUrl="https://github.com/Suryac72/my-portfolio"
       projectUrl="https://myblogger-react-app.surge.sh/"
       technologies={["Next JS","React", "Tailwind CSS","Javascript"]}
     />
