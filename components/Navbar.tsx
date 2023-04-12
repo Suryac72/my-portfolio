@@ -54,26 +54,26 @@ const Navbar = () => {
       }
     >
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
-        <Link href="#home" scroll={false}>
+        <Link href="/#home" scroll={false}>
           <Image src={logo} alt="/" width="125" height="50" />
         </Link>
         <div>
           <ul style={{color : `${linkColor}`}} className="hidden md:flex">
-            <Link href="#home" scroll={false}>
+            <Link href="/#home" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">Home</li>
             </Link>
-            <Link href="#about" scroll={false}>
+            <Link href="/#about" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">About</li>
             </Link>
-            <Link href="#skills" scroll={false}>
+            <Link href="/#skills" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">Skills</li>
             </Link>
-            <Link href="#projects" scroll={false}>
+            <Link href="/#projects" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">
                 Projects
               </li>
             </Link>
-            <Link href="#contact" scroll={false}>
+            <Link href="/#contact" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">Contact</li>
             </Link>
           </ul>
@@ -97,7 +97,7 @@ const Navbar = () => {
         >
           <div>
             <div className="flex w-full items-center justify-between">
-              <Link href="#home" scroll={false}>
+              <Link href="/#home" scroll={false}>
                 <Image src={logo} alt="/" width="130" height="35" />
               </Link>
               <div
@@ -115,27 +115,27 @@ const Navbar = () => {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <Link href="#home" scroll={false}>
+              <Link href="/#home" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Home
                 </li>
               </Link>
-              <Link href="#about" scroll={false}>
+              <Link href="/#about" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   About
                 </li>
               </Link>
-              <Link href="#skills" scroll={false}>
+              <Link href="/#skills" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Skills
                 </li>
               </Link>
-              <Link href="#projects" scroll={false}>
+              <Link href="/#projects" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Projects
                 </li>
               </Link>
-              <Link href="#contact" scroll={false}>
+              <Link href="/#contact" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Contact
                 </li>
@@ -156,7 +156,7 @@ const Navbar = () => {
                   <AiOutlineMail />
                 </div>
                 <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
-                  <Link href="#home" scroll={false}>
+                  <Link href="/#home" scroll={false}>
                     <BsFillPersonLinesFill />
                   </Link>
                 </div>
