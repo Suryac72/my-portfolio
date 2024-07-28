@@ -1,10 +1,10 @@
 import React from "react";
 import { RiRadioButtonFill } from "react-icons/ri";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 interface ProjectCardProps {
-  imageUrl: StaticImageData;
+  imageUrl: string;
   title: string;
   subtitle: string;
   description: string;
@@ -21,8 +21,6 @@ const ProjectCard = (projectCardProps: ProjectCardProps) => {
         <div className="absolute top-0 left-0 w-full h-[50vh] bg-black/70 z-10" />
         <Image
           className="absolute z-1"
-          layout="fill"
-          objectFit="cover"
           src={projectCardProps.imageUrl}
           alt="/"
         />
@@ -38,14 +36,9 @@ const ProjectCard = (projectCardProps: ProjectCardProps) => {
           <h2>Overview</h2>
           <br />
           <p>
-            {/* This app was built using Next JS and is hosted on Netlify.This is basically fully
-            responsive website and all the components of website are designed with the help of 
-            tailwind css.This app shows how a data-finance website looks like and also it shows my 
-            frontend skills which I used in this application to design its components.  */}
             {projectCardProps.description}
           </p>
           <a
-            // href='https://github.com/Suryac72/data-finance-frontend-project/tree/master'
             href={projectCardProps.codeUrl}
             target="_blank"
             rel="noreferrer"
@@ -53,7 +46,6 @@ const ProjectCard = (projectCardProps: ProjectCardProps) => {
             <button className="px-8 py-2 mt-4 mr-8">Code</button>
           </a>
           <a
-            // href='https://data-finance-react-tailwind.netlify.app/'
             href={projectCardProps.projectUrl}
             target="_blank"
             rel="noreferrer"
@@ -65,18 +57,7 @@ const ProjectCard = (projectCardProps: ProjectCardProps) => {
           <div className="p-2">
             <p className="text-center font-bold pb-2">Technologies</p>
             <div className="grid grid-cols-3 md:grid-cols-1">
-              {/* <p className='text-gray-600 py-2 flex items-center'>
-                <RiRadioButtonFill className='pr-1' /> React
-              </p>
-              <p className='text-gray-600 py-2 flex items-center'>
-                <RiRadioButtonFill className='pr-1' /> Tailwind
-              </p>
-              <p className='text-gray-600 py-2 flex items-center'>
-                <RiRadioButtonFill className='pr-1' /> Javascript
-              </p>
-              <p className='text-gray-600 py-2 flex items-center'>
-                <RiRadioButtonFill className='pr-1' /> Next JS
-              </p> */}
+    
               {technologies.map((tech) => (
                 // eslint-disable-next-line react/jsx-key
                 <p className="text-gray-600 py-2 flex items-center">

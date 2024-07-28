@@ -1,31 +1,41 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import Image, { StaticImageData } from "next/image";
+import { urlFor } from "@/utils/sanity-client";
+import Image from "next/image";
 import React from "react";
 
-
-
-interface AboutProps { 
-  title : string;
-  subtitle : string;
-  innerSubTitle : string;
-  description : string;
-  aboutImage : StaticImageData
+export interface AboutProps {
+  title: string;
+  subtitle: string;
+  innerSubTitle: string;
+  description: string;
+  aboutImage: string;
 }
-const About = (aboutProps : AboutProps) => {
+
+const About = (aboutProps: AboutProps) => {
   return (
-    <div id='about' className="w-full md:screen p-10 flex items-center py-16">
+    <div id="about" className="w-full md:screen p-10 flex items-center py-16">
       <div className="max-w-[1240px] m-auto md:grid grid-cols-3 gap-8">
         <div className="col-span-2">
-          <p className="uppercase text-xl tracking-widest text-[#5651e5]">{aboutProps.title}</p>
+          <p className="uppercase text-xl tracking-widest text-[#5651e5]">
+            {aboutProps.title}
+          </p>
           <h2 className="py-4">{aboutProps.subtitle}</h2>
-          <p className="py-2 text-gray-600">{aboutProps.innerSubTitle}</p>
-          <p className="py-2 text-gray-700 text-justify">
+          <p className="py-2 text-gray-600 dark:text-white">{aboutProps.innerSubTitle}</p>
+          <p className="py-2 text-gray-700 text-justify dark:text-white">
             {aboutProps.description}
           </p>
-          <p className="py-2 text-gray-700 underline cursor-pointer font-Roboto-Slab">Check out some of my latest projects</p>
+          <p className="py-2 text-gray-700 dark:text-white underline cursor-pointer font-Roboto-Slab">
+            Check out some of my latest projects
+          </p>
         </div>
         <div className="w-full h-auto shadow-xl shadow-gray-400 rounded-xl flex items-center justify-center hover:scale-105 ease-in duration-300 ">
-            <Image className="w-[520px] h-[610px] md:h-[510px] rounded-xl"src={aboutProps.aboutImage} alt="/"/>
+          <Image
+            className="w-[520px] h-[610px] md:h-[510px] rounded-xl"
+            src={urlFor(aboutProps.aboutImage).url()}
+            alt="/"
+            width={520}
+            height={610}
+          />
         </div>
       </div>
     </div>

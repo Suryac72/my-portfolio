@@ -6,6 +6,7 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import ToggleButton from "./ToggleButton";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -46,7 +47,7 @@ const Navbar = () => {
 
   return (
     <div
-      style={{backgroundColor : `${navBg}`}}
+      style={{ backgroundColor: `${navBg}` }}
       className={
         shadow
           ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300"
@@ -54,11 +55,14 @@ const Navbar = () => {
       }
     >
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
-        <Link href="/#home" scroll={false}>
-          <Image src={logo} alt="/" width="125" height="50" />
-        </Link>
+        <div className="flex items-center space-x-6">
+          <Link href="/#home" scroll={false}>
+            <Image src={logo} alt="/" width="125" height="50" />
+          </Link>
+          <ToggleButton />
+        </div>
         <div>
-          <ul style={{color : `${linkColor}`}} className="hidden md:flex">
+          <ul style={{ color: `${linkColor}` }} className="hidden md:flex">
             <Link href="/#home" scroll={false}>
               <li className="m-10 text-sm uppercase hover:border-b">Home</li>
             </Link>
@@ -109,7 +113,7 @@ const Navbar = () => {
             </div>
             <div className="border-b border-gray-300 my-4">
               <p className="w-[85%] md:w-[90%] py-4">
-                Let&#39;s build something exicting together
+                Let&#39;s build something exciting together
               </p>
             </div>
           </div>
