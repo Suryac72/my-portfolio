@@ -1,17 +1,11 @@
-import { Inter } from 'next/font/google';
-import Head from 'next/head';
-import Main from '@/components/Main';
-import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Projects from '@/components/Project';
-import Contact from '@/components/Contact';
-import { siteData } from '@/components/data/site-content';
-import { GetStaticProps } from 'next';
-import { client } from '@/utils/sanity-client';
-import { AboutProps, Skill } from '@/models/models';
-import ToggleButton from '@/components/ToggleButton';
+import Head from "next/head";
+import { Main, About, Skills, Projects, ToggleButton } from "@/components";
+import Contact from "@/components/Contact";
+import { GetStaticProps } from "next";
+import { client } from "@/utils/sanity-client";
+import { AboutProps, Skill } from "@/models/models";
+import { siteData } from "@/components/data/site-content";
 
-const inter = Inter({ subsets: ['latin'] });
 
 interface HomePageProps {
   aboutData: AboutProps[];
@@ -19,7 +13,11 @@ interface HomePageProps {
   projects: any;
 }
 
-export default function Home({ aboutData, skillsData, projects }: HomePageProps) {
+export default function Home({
+  aboutData,
+  skillsData,
+  projects,
+}: HomePageProps) {
   return (
     <>
       <Head>
@@ -27,7 +25,7 @@ export default function Home({ aboutData, skillsData, projects }: HomePageProps)
         <meta name="description" content="Welcome to my portfolio website" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white">
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600">
         <ToggleButton className="absolute top-4 right-4" />
         <Main
           title={siteData.main.title}

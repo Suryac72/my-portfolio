@@ -6,7 +6,7 @@ import { urlFor } from "@/utils/sanity-client";
 interface SkillProps {
   skillsData: Skill[];
 }
-const Skills = ({ skillsData }: SkillProps) => {
+export const Skills = ({ skillsData }: SkillProps) => {
   return (
     <div id="skills" className="w-full lg:h-screen p-10">
       <div className="max-w-[1240px] mx-auto flex flex-col justify-center h-full">
@@ -18,7 +18,7 @@ const Skills = ({ skillsData }: SkillProps) => {
           {skillsData.map((skill, key) => {
             return (
               <div
-                className="p-6 shadow-xl rounded-xl hover:scale-105 ease-in duration-300 dark:bg-[#758694] dark:text-white"
+                className="p-6 shadow-xl rounded-xl hover:scale-105 ease-in duration-300 dark:bg-[#758694] bg-[#EEEEEE] dark:text-white"
                 key={key}
               >
                 <div className="grid grid-cols-2 gap-4 justify-center items-center">
@@ -43,4 +43,3 @@ const Skills = ({ skillsData }: SkillProps) => {
   );
 };
 
-export default Skills;

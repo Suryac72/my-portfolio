@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import {Navbar} from "@/components/Navbar";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/utils/theme-context";
 import type { AppProps } from "next/app";

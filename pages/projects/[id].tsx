@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/ProjectCard";
+import {ProjectCard} from "@/components/ProjectCard";
 import { ProjectDTO } from "@/models/models";
 import { client, urlFor } from "@/utils/sanity-client";
 

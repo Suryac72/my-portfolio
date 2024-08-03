@@ -9,14 +9,14 @@ interface ProjectItemProps {
   projectTech: string;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = ({
+export const ProjectItem: React.FC<ProjectItemProps> = ({
   title,
   backgroundImg,
   projectUrl,
   projectTech,
 }) => {
   return (
-    <div className="relative flex items-center justify-center h-auto w-full shadow-xl dark:bg-[#405D72] shadow-gray-400 dark:shadow-none  rounded-xl p-4 group hover:bg-gradient-to-r from-[#5651e5] to-[#709dff]">
+    <div className="relative flex items-center justify-center h-auto w-full shadow-xl bg-[#EEEEEE] dark:bg-[#405D72] shadow-gray-400 dark:shadow-none  rounded-xl p-4 group hover:bg-gradient-to-r from-[#5651e5] to-[#709dff]">
       <Image
         className="rounded-xl group-hover:opacity-10 w-full h-[300px]"
         src={backgroundImg}
@@ -39,4 +39,4 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   );
 };
 
-export default ProjectItem;
+

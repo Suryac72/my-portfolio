@@ -6,9 +6,9 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ToggleButton from "./ToggleButton";
+import {ToggleButton} from "./ToggleButton";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [shadow, setShadow] = useState(false);
   const [navBg, setNavBg] = useState("#ecf0f3");
@@ -54,31 +54,31 @@ const Navbar = () => {
           : "fixed w-full h-20 z-[100]"
       }
     >
-      <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
-        <div className="flex items-center space-x-6">
+      <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16 dark:bg-gray-900 dark:text-white ">
+        <div className="flex items-center space-x-6 ">
           <Link href="/#home" scroll={false}>
-            <Image src={logo} alt="/" width="125" height="50" />
+            <Image src={logo} alt="/" width="125" height="50"/>
           </Link>
           <ToggleButton />
         </div>
         <div>
           <ul style={{ color: `${linkColor}` }} className="hidden md:flex">
             <Link href="/#home" scroll={false}>
-              <li className="m-10 text-sm uppercase hover:border-b">Home</li>
+              <li className="m-10 text-sm uppercase hover:border-b dark:text-white">Home</li>
             </Link>
             <Link href="/#about" scroll={false}>
-              <li className="m-10 text-sm uppercase hover:border-b">About</li>
+              <li className="m-10 text-sm uppercase hover:border-b dark:text-white">About</li>
             </Link>
             <Link href="/#skills" scroll={false}>
-              <li className="m-10 text-sm uppercase hover:border-b">Skills</li>
+              <li className="m-10 text-sm uppercase hover:border-b dark:text-white">Skills</li>
             </Link>
             <Link href="/#projects" scroll={false}>
-              <li className="m-10 text-sm uppercase hover:border-b">
+              <li className="m-10 text-sm uppercase hover:border-b dark:text-white">
                 Projects
               </li>
             </Link>
             <Link href="/#contact" scroll={false}>
-              <li className="m-10 text-sm uppercase hover:border-b">Contact</li>
+              <li className="m-10 text-sm uppercase hover:border-b dark:text-white">Contact</li>
             </Link>
           </ul>
           <div onClick={handleNav} className="md:hidden">
@@ -95,7 +95,7 @@ const Navbar = () => {
         <div
           className={
             nav
-              ? "fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-10 ease-in duration-500"
+              ? "fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] dark:bg-gray-900 p-10 ease-in duration-500"
               : "fixed left-[-100%] top-0 p-10 ease-in duration-500"
           }
         >
@@ -106,18 +106,18 @@ const Navbar = () => {
               </Link>
               <div
                 onClick={handleNav}
-                className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer"
+                className="rounded-full shadow-lg shadow-gray-400 dark:shadow-none dark:text-white dark:bg-[#405D72] p-3 cursor-pointer"
               >
                 <AiOutlineClose />
               </div>
             </div>
-            <div className="border-b border-gray-300 my-4">
+            <div className="border-b border-gray-300  dark:shadow-none dark:text-white my-4">
               <p className="w-[85%] md:w-[90%] py-4">
                 Let&#39;s build something exciting together
               </p>
             </div>
           </div>
-          <div className="py-4 flex flex-col">
+          <div className="py-4 flex flex-col dark:shadow-none dark:text-white">
             <ul className="uppercase">
               <Link href="/#home" scroll={false}>
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
@@ -149,17 +149,17 @@ const Navbar = () => {
               <p className="uppercase tracking-widest text-[#5651e5]">
                 Let&#39;s Connect
               </p>
-              <div className="flex items-center justify-between my-4 w-full sm:w-[80%]">
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
+              <div className="flex items-center justify-between my-4 w-full sm:w-[80%] ">
+                <div className="rounded-full shadow-lg shadow-gray-400 dark:shadow-none dark:bg-[#405D72] p-3 cursor-pointer hover:scale-105 ease-in duration-300">
                   <FaLinkedinIn />
                 </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
+                <div className="rounded-full shadow-lg shadow-gray-400 dark:shadow-none dark:bg-[#405D72] p-3 cursor-pointer hover:scale-105 ease-in duration-300">
                   <FaGithub />
                 </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
+                <div className="rounded-full shadow-lg shadow-gray-400 dark:shadow-none dark:bg-[#405D72] p-3 cursor-pointer hover:scale-105 ease-in duration-300">
                   <AiOutlineMail />
                 </div>
-                <div className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300">
+                <div className="rounded-full shadow-lg shadow-gray-400 dark:shadow-none dark:bg-[#405D72] p-3 cursor-pointer hover:scale-105 ease-in duration-300">
                   <Link href="/#home" scroll={false}>
                     <BsFillPersonLinesFill />
                   </Link>
@@ -173,4 +173,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
