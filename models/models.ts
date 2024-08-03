@@ -23,3 +23,10 @@ export interface ProjectDTO {
   projectUrl: string;
   technologies: string[];
 }
+
+export interface ContactForm {
+  name:string;
+  contactUsTitle: string;
+  contactUsImage: string;
+  contactUsDescription: string;
+}

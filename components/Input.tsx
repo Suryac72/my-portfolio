@@ -1,23 +1,28 @@
 import React from "react";
+import { UseFormRegister, FieldErrors } from "react-hook-form";
 
 interface InputProps {
   label: string;
   inputType: string;
   inputName: string;
-  errorMessage: string;
   isRequired?: boolean;
   isTextArea?: boolean;
   rows?: number;
+  register: UseFormRegister<any>;
+  errors: FieldErrors<any>;
 }
+
 export const Input = ({
   label,
   inputType,
   inputName,
-  errorMessage,
   isRequired,
   isTextArea,
   rows = 10,
+  register,
+  errors,
 }: InputProps) => {
+
   return (
     <>
       <label className="uppercase text-sm py-2">{`${label}${
@@ -25,20 +30,26 @@ export const Input = ({
       }`}</label>
       {!isTextArea ? (
         <input
-          className="border-2 rounded-lg p-3 flex border-gray-300"
+          className={`border-2 rounded-lg p-3 flex border-gray-300 ${
+            errors[inputName] ? "border-red-500" : ""
+          }`}
           type={inputType}
-          name={inputName}
+          {...register(inputName, { required: isRequired })}
         />
       ) : (
         <textarea
-          className="border-2 rounded-lg p-3 border-gray-300"
+          className={`border-2 rounded-lg p-3 border-gray-300 ${
+            errors[inputName] ? "border-red-500" : ""
+          }`}
           rows={rows}
-          name={inputName}
+          {...register(inputName, { required: isRequired })}
         ></textarea>
       )}
-      <span className="text-red-600 pt-2">{errorMessage}</span>
+      {errors[inputName] && (
+        <span className="text-red-600 pt-2">
+          {errors[inputName] && `${label} is required.`}
+        </span>
+      )}
     </>
   );
 };
-
-

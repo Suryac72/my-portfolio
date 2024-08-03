@@ -1,39 +1,87 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { HiOutlineChevronDoubleUp } from "react-icons/hi";
 import ContactImg from "../public/assets/contact.jpg";
 import { Input } from "./Input";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ClipLoader } from "react-spinners";
+import { ContactForm } from "@/models/models";
+import { urlFor } from "@/utils/sanity-client";
+
+interface FormValues {
+  name: string;
+  phone: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 
-export const Contact = () => {
+export const Contact = ({contactUsDescription,contactUsImage,contactUsTitle,name}: ContactForm) => {
+  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    setLoading(true);
+    try {
+      const response = await fetch("https://formspree.io/f/mnnadlvw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast.success(
+          "Your response recorded successfully. I will get back to you soon."
+        );
+      } else {
+        toast.error("Failed to submit the form. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div id="contact" className="w-full lg:h-[200vh]">
-      <div className="max-w-[1240px] m-auto px-10 py-16 w-full ">
+      <ToastContainer position="top-center" />
+      <div className="max-w-[1240px] m-auto px-10 py-16 w-full">
         <p className="text-xl tracking-widest uppercase text-[#5651e5]">
           Contact
         </p>
         <h2 className="py-4">Get In Touch</h2>
         <div className="grid lg:grid-cols-5 gap-8">
           {/* left */}
-          <div className="col-span-3 lg:col-span-2 w-full h-full shadow-xl dark:shadow-none bg-[#EEEEEE] dark:bg-[#405D72] shadow-gray-400  rounded-xl p-4">
-            <div className="lg:p-4 h-full ">
+          <div className="col-span-3 lg:col-span-2 w-full h-full shadow-xl dark:shadow-none bg-[#EEEEEE] dark:bg-[#405D72] shadow-gray-400 rounded-xl p-4">
+            <div className="lg:p-4 h-full">
               <div>
                 <Image
                   className="rounded-xl hover:scale-105 ease-in duration-300"
-                  src={ContactImg}
+                  src={urlFor(contactUsImage).url()}
                   alt="/"
+                  width={500}
+                  height={500}
                 />
               </div>
               <div>
-                <h3 className="py-2 text-3xl">Surya Prakash Chaudhary</h3>
-                <p>Full-Stack Developer</p>
+                <h3 className="py-2 text-3xl">{name}</h3>
+                <p>{contactUsTitle}</p>
                 <p className="py-4">
-                  I am available for freelance or full-time positions. Contact
-                  me and let&apos;s talk.
+                 {contactUsDescription}
                 </p>
               </div>
               <div>
@@ -55,16 +103,16 @@ export const Contact = () => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <div className="rounded-full shadow-lg shadow-gray-400  dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
+                    <div className="rounded-full shadow-lg shadow-gray-400 dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
                       <FaGithub />
                     </div>
                   </a>
 
-                  <div className="rounded-full shadow-lg shadow-gray-400  dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
+                  <div className="rounded-full shadow-lg shadow-gray-400 dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
                     <AiOutlineMail />
                   </div>
                   <Link href="/resume">
-                    <div className="rounded-full shadow-lg shadow-gray-400  dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
+                    <div className="rounded-full shadow-lg shadow-gray-400 dark:bg-[#131842] dark:shadow-none p-6 cursor-pointer hover:scale-110 ease-in duration-300">
                       <BsFillPersonLinesFill />
                     </div>
                   </Link>
@@ -74,21 +122,18 @@ export const Contact = () => {
           </div>
 
           {/* right */}
-          <div className="col-span-3 w-full h-auto shadow-xl shadow-gray-400  bg-[#EEEEEE] dark:bg-[#405D72] dark:shadow-none rounded-xl lg:p-4">
+          <div className="col-span-3 w-full h-auto shadow-xl shadow-gray-400 bg-[#EEEEEE] dark:bg-[#405D72] dark:shadow-none rounded-xl lg:p-4">
             <div className="p-4">
-              <form
-                action="https://getform.io/f/57d00a1e-cb8c-494a-9257-d5277f3d6880"
-                method="POST"
-                encType="multipart/form-data"
-              >
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 gap-4 w-full py-2">
                   <div className="flex flex-col">
                     <Input
                       label="Name"
                       inputType="text"
                       inputName="name"
-                      errorMessage=""
                       isRequired={true}
+                      register={register}
+                      errors={errors}
                     />
                   </div>
                   <div className="flex flex-col">
@@ -96,41 +141,52 @@ export const Contact = () => {
                       label="Phone Number"
                       inputType="text"
                       inputName="phone"
-                      errorMessage=""
                       isRequired={true}
+                      register={register}
+                      errors={errors}
                     />
                   </div>
                 </div>
                 <div className="flex flex-col py-2">
-                   <Input
-                      label="Email"
-                      inputType="email"
-                      inputName="email"
-                      errorMessage=""
-                      isRequired={true}
-                    />
+                  <Input
+                    label="Email"
+                    inputType="email"
+                    inputName="email"
+                    isRequired={true}
+                    register={register}
+                    errors={errors}
+                  />
                 </div>
                 <div className="flex flex-col py-2">
                   <Input
-                      label="Subject"
-                      inputType="text"
-                      inputName="subject"
-                      errorMessage=""
-                      isRequired={true}
-                    />
+                    label="Subject"
+                    inputType="text"
+                    inputName="subject"
+                    isRequired={true}
+                    register={register}
+                    errors={errors}
+                  />
                 </div>
                 <div className="flex flex-col py-2">
-                   <Input
-                      label="Message"
-                      inputType="text"
-                      inputName="message"
-                      errorMessage=""
-                      isRequired={true}
-                      isTextArea={true}
-                    />
+                  <Input
+                    label="Message"
+                    inputType="text"
+                    inputName="message"
+                    isRequired={true}
+                    isTextArea={true}
+                    register={register}
+                    errors={errors}
+                  />
                 </div>
-                <button className="w-full p-4 text-gray-100 mt-4 dark:shadow-none">
-                  Send Message
+                <button
+                  className="w-full p-4 text-gray-100 mt-4 dark:shadow-none flex justify-center items-center"
+                  disabled={loading} 
+                >
+                  {loading ? (
+                    <ClipLoader size={20} color={"#fff"} />
+                  ) : (
+                    "Send Message"
+                  )}
                 </button>
               </form>
             </div>

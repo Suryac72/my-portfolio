@@ -4,19 +4,22 @@ import Contact from "@/components/Contact";
 import { GetStaticProps } from "next";
 import { client } from "@/utils/sanity-client";
 import { AboutProps, Skill } from "@/models/models";
-import { siteData } from "@/components/data/site-content";
 
 
 interface HomePageProps {
   aboutData: AboutProps[];
   skillsData: Skill[];
   projects: any;
+  header:any;
+  contactDetails: any;
 }
 
 export default function Home({
   aboutData,
   skillsData,
   projects,
+  header,
+  contactDetails
 }: HomePageProps) {
   return (
     <>
@@ -28,17 +31,17 @@ export default function Home({
       <div className="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600">
         <ToggleButton className="absolute top-4 right-4" />
         <Main
-          title={siteData.main.title}
-          subtitle={siteData.main.subtitle}
-          innerSubTitle={siteData.main.innerSubTitle}
-          description={siteData.main.description}
-          linkedInUrl={siteData.main.linkedInUrl}
-          githubUrl={siteData.main.githubUrl}
+          title={header[0].title}
+          subtitle={header[0].subtitle}
+          innerSubTitle={header[0].innerSubTitle}
+          description={header[0].description}
+          linkedInUrl={header[0].linkedInUrl}
+          githubUrl={header[0].githubUrl}
         />
         <About {...aboutData[0]} />
         <Skills skillsData={skillsData} />
         <Projects projects={projects} />
-        <Contact />
+        <Contact {...contactDetails[0]}/>
       </div>
     </>
   );
@@ -48,12 +51,16 @@ export const getStaticProps: GetStaticProps = async () => {
   const aboutData = await client.fetch(`*[_type == "about"]`);
   const skillsData = await client.fetch(`*[_type == "skills"]`);
   const projects = await client.fetch(`*[_type == "works"]`);
+  const header = await client.fetch(`*[_type == "header"]`);
+  const contactDetails = await client.fetch(`*[_type == "personalInformation"]`);
 
   return {
     props: {
       aboutData,
       skillsData,
       projects,
+      header,
+      contactDetails
     },
   };
 };
