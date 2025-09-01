@@ -1,0 +1,10 @@
+# Prevent copying these into the image
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.next
+.env
+.env.local
