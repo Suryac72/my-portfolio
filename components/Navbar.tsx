@@ -118,6 +118,9 @@ export const Navbar = () => {
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
+            <a href="/api/download-cv" className="hidden md:inline-flex px-3 py-2 bg-yellow-400 text-white rounded-md font-medium hover:brightness-95 transition">
+              Download CV
+            </a>
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"

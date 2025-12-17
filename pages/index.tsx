@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
-import { fetchQuery } from "@/utils/sanity-client";
+import { fetchQuery, urlFor } from "@/utils/sanity-client";
 import { AboutProps, Skill } from "@/models/models";
 import dynamic from "next/dynamic";
 import { Hero, About, Services, Skills, Projects } from "@/components";
@@ -28,11 +28,25 @@ export default function Home({
     <>
       <Head>
         <title>{`${header?.[1]?.title} | ${header?.[1]?.subtitle}` || DEFAULT_HEADER.title}</title>
-        <meta
-          name="description"
-          content={header?.[0]?.description || DEFAULT_HEADER.description}
-        />
+        <meta name="description" content={header?.[0]?.description || DEFAULT_HEADER.description} />
+        <meta property="og:title" content={header?.[1]?.title || DEFAULT_HEADER.title} />
+        <meta property="og:description" content={header?.[0]?.description || DEFAULT_HEADER.description} />
+        {/** Preload LCP image when available to improve LCP */}
+        {header?.[0]?.image ? (
+          <link rel="preload" as="image" href={urlFor(header[0].image).url()} />
+        ) : null}
+        <meta property="twitter:card" content="summary_large_image" />
         <link rel="icon" href="/logo.png" />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'} />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "${(header?.[0]?.title || '').replace(/"/g, '')}",
+            "jobTitle": "${(header?.[0]?.innerSubTitle || '').replace(/"/g, '')}",
+            "url": "${process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'}"
+          }`}
+        </script>
       </Head>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-black dark:text-white">
         <Hero header={header?.[0]} />
