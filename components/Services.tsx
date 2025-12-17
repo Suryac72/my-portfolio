@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
+import Link from 'next/link';
 import Image from "next/image";
 import { Code, Palette } from "lucide-react";
 import { urlFor } from "@/utils/sanity-client";
@@ -73,7 +74,7 @@ export const Services: React.FC<ServicesProps> = ({ servicesData }) => {
 
         <div className="mt-16 text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-4">Interested in working together?</p>
-          <a href="#contact" className="inline-block px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">Let's Talk</a>
+          <Link href="#contact" className="inline-block px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">Let's Talk</Link>
         </div>
       </div>
     </section>
