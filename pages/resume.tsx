@@ -17,7 +17,7 @@ export default function ResumePage() {
       <main className="min-h-screen flex items-center justify-center p-8">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Preparing your download...</h1>
-          <p className="mb-4">If the download doesn't start automatically, <Link href="/api/download-cv">click here</Link>.</p>
+          <p className="mb-4">If the download doesn&apos;t start automatically, <Link href="/api/download-cv">click here</Link>.</p>
         </div>
       </main>
     </>
