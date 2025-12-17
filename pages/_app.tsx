@@ -1,4 +1,4 @@
-import {Navbar} from "@/components/Navbar";
+import { Navbar, CustomCursor } from "@/components";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/utils/theme-context";
 import type { AppProps } from "next/app";
@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider>
+      <CustomCursor />
       <Navbar />
       <Component {...pageProps} />
     </ThemeProvider>

@@ -40,33 +40,44 @@ export const ProjectCard = (projectCardProps: ProjectCardProps) => {
           <p>
             {projectCardProps.description}
           </p>
-          <a
-            href={projectCardProps.codeUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button className="px-8 py-2 mt-4 mr-8 dark:shadow-none">Code</button>
-          </a>
-          <a
-            href={projectCardProps.projectUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button className="px-8 py-2 mt-4 dark:shadow-none">Demo</button>
-          </a>
+          <div className="flex flex-wrap gap-3 mt-4">
+            {/* Code button - outline style */}
+            {projectCardProps.codeUrl ? (
+              <a href={projectCardProps.codeUrl} target="_blank" rel="noreferrer" aria-label={`View source code for ${projectCardProps.title}`}>
+                <button className="px-6 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-transparent text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-sm" type="button">
+                  Code
+                </button>
+              </a>
+            ) : (
+              <button disabled className="px-6 py-2 rounded-md border border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed" title="Code not available">
+                Code
+              </button>
+            )}
+
+            {/* Demo button - primary style */}
+            {projectCardProps.projectUrl ? (
+              <a href={projectCardProps.projectUrl} target="_blank" rel="noreferrer" aria-label={`Open demo for ${projectCardProps.title}`}>
+                <button className="px-6 py-2 rounded-md bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow hover:opacity-95 transition-all" type="button">
+                  Demo
+                </button>
+              </a>
+            ) : (
+              <button disabled className="px-6 py-2 rounded-md bg-gray-100 text-gray-400 cursor-not-allowed" title="Demo not available">
+                Demo
+              </button>
+            )}
+          </div>
         </div>
-        <div className="col-span-4 md:col-span-1 shadow-xl shadow-gray-400  dark:shadow-none dark:bg-[#758694] dark:text-white rounded-xl py-4">
+          <div className="col-span-4 md:col-span-1 shadow-xl shadow-gray-200 dark:shadow-none bg-white dark:bg-gray-800 dark:text-white rounded-xl py-4">
           <div className="p-2">
             <p className="text-center font-bold pb-2">Technologies</p>
-            <div className="grid grid-cols-3 md:grid-cols-1">
-    
-              {technologies.map((tech) => (
-                // eslint-disable-next-line react/jsx-key
-                <p className="text-gray-600 py-2 flex items-center dark:text-white">
-                  <RiRadioButtonFill className="pr-1" /> {tech}
-                </p>
-              ))}
-            </div>
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-2">
+                {technologies?.map((tech, idx) => (
+                  <p key={idx} className="text-gray-600 py-2 flex items-center dark:text-white text-sm">
+                    <RiRadioButtonFill className="pr-2 text-yellow-500" /> {tech}
+                  </p>
+                ))}
+              </div>
           </div>
         </div>
         <Link href="/#projects">
