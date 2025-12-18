@@ -1,16 +1,16 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url';
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const client = createClient({
-  projectId: 'tub1piag', 
-  dataset: 'production', 
-  apiVersion: '2024-07-27',
-  useCdn: true, 
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-07-27",
+  useCdn: true,
 });
 
 const builder = imageUrlBuilder(client);
 
-export function urlFor(source : any) {
+export function urlFor(source: any) {
   return builder.image(source);
 }
 
@@ -21,7 +21,11 @@ const _cache = new Map<string, { ts: number; data: any }>();
  * Fetch a GROQ query from Sanity with a short in-memory cache TTL.
  * Use this for server-side fetches (getStaticProps/getServerSideProps).
  */
-export async function fetchQuery(query: string, params?: Record<string, any>, ttlSeconds = 60) {
+export async function fetchQuery(
+  query: string,
+  params?: Record<string, any>,
+  ttlSeconds = 60
+) {
   const key = query + JSON.stringify(params || {});
   const now = Date.now();
 
@@ -34,7 +38,7 @@ export async function fetchQuery(query: string, params?: Record<string, any>, tt
   try {
     _cache.set(key, { ts: now, data });
   } catch (e) {
-    // ignore cache errors
+    console.error("Sanity cache set failed:", e);
   }
   return data;
 }

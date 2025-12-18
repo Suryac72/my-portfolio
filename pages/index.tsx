@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Hero, About, Services, Skills, Projects } from "@/components";
 const Contact = dynamic(() => import("@/components").then((mod) => mod.Contact), { ssr: false });
 import { DEFAULT_HEADER } from "@/utils/defaults";
+import Chatbot from "@/components/Chatbot";
 
 interface HomePageProps {
   aboutData: AboutProps[];
@@ -59,6 +60,7 @@ export default function Home({
         />
         <Projects projects={projects} />
         <Contact contactDetails={contactDetails?.[0]} />
+        <Chatbot/>
       </div>
     </>
   );
