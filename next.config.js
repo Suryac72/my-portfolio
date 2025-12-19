@@ -22,15 +22,11 @@ const nextConfig = {
   // 3. Compression Settings
   experimental: {
     // Treat these as external to avoid Webpack bloat
-    serverComponentsExternalPackages: ['sharp', 'onnxruntime-node'],
+    serverComponentsExternalPackages: [],
 
     // AGGRESSIVELY exclude heavy files from the deployment zip
     outputFileTracingExcludes: {
       '*': [
-        // Exclude heavy AI binaries (saves ~200MB)
-        './node_modules/onnxruntime-node/**/*',
-        './node_modules/sharp/**/*',
-        
         // Exclude system binaries
         './node_modules/@swc/core-linux-x64-gnu',
         './node_modules/@swc/core-linux-x64-musl',
