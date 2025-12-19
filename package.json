@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ingest": "ts-node scripts/ingest.ts"
+    "ingest": "npx tsx scripts/ingest.ts"
   },
   "engines": {
     "node": "^24 || >=24"
