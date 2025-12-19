@@ -28,7 +28,6 @@ const nextConfig = {
     outputFileTracingExcludes: {
       '*': [
         // Exclude heavy AI binaries (saves ~200MB)
-        './node_modules/@huggingface/transformers/**/*',
         './node_modules/onnxruntime-node/**/*',
         './node_modules/sharp/**/*',
         
