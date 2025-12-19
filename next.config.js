@@ -19,13 +19,14 @@ const nextConfig = {
   // 3. Compression Settings
   experimental: {
     // Treat these as external to avoid Webpack bloat
-    serverComponentsExternalPackages: [ '@huggingface/transformers','sharp' ],
+    serverComponentsExternalPackages: ['sharp', 'onnxruntime-node', '@huggingface/transformers'],
 
     // AGGRESSIVELY exclude heavy files from the deployment zip
     outputFileTracingExcludes: {
       '*': [
         // Exclude heavy AI binaries (saves ~200MB)
         './node_modules/@huggingface/transformers/**/*',
+        './node_modules/onnxruntime-node/**/*',
         './node_modules/sharp/**/*',
         
         // Exclude system binaries
