@@ -19,21 +19,22 @@ const nextConfig = {
   // 3. Compression Settings
   experimental: {
     // Treat these as external to avoid Webpack bloat
-    serverComponentsExternalPackages: ['@huggingface/transformers'],
+    serverComponentsExternalPackages: [ '@huggingface/transformers','sharp' ],
 
     // AGGRESSIVELY exclude heavy files from the deployment zip
     outputFileTracingExcludes: {
       '*': [
         // Exclude heavy AI binaries (saves ~200MB)
         './node_modules/@huggingface/transformers/**/*',
-
+        './node_modules/sharp/**/*',
+        
         // Exclude system binaries
         './node_modules/@swc/core-linux-x64-gnu',
         './node_modules/@swc/core-linux-x64-musl',
         './node_modules/@esbuild/linux-x64',
         './node_modules/terser',
         './node_modules/webpack',
-
+        
         // Exclude source maps and docs
         './node_modules/**/*.map',
         './node_modules/**/*.md',
