@@ -1,4 +1,5 @@
 // Base components (modernized)
+/* istanbul ignore file */
 export * from './Navbar';
 export * from './Hero';
 export * from './About';

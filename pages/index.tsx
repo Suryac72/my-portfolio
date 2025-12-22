@@ -4,7 +4,10 @@ import { fetchQuery, urlFor } from "@/utils/sanity-client";
 import { AboutProps, Skill } from "@/models/models";
 import dynamic from "next/dynamic";
 import { Hero, About, Services, Skills, Projects } from "@/components";
-const Contact = dynamic(() => import("@/components").then((mod) => mod.Contact), { ssr: false });
+const Contact = dynamic(
+  () => import("@/components").then((mod) => mod.Contact),
+  { ssr: false }
+);
 import { DEFAULT_HEADER } from "@/utils/defaults";
 import Chatbot from "@/components/Chatbot";
 
@@ -28,24 +31,55 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>{`${header?.[1]?.title} | ${header?.[1]?.subtitle}` || DEFAULT_HEADER.title}</title>
-        <meta name="description" content={header?.[0]?.description || DEFAULT_HEADER.description} />
-        <meta property="og:title" content={header?.[1]?.title || DEFAULT_HEADER.title} />
-        <meta property="og:description" content={header?.[0]?.description || DEFAULT_HEADER.description} />
-        {/** Preload LCP image when available to improve LCP */}
+        <title>
+          {header?.[1]?.title && header?.[1]?.subtitle
+            ? `${header[1].title} | ${header[1].subtitle}`
+            : DEFAULT_HEADER.title}
+        </title>
+
+        <meta
+          name="description"
+          content={
+            header?.[0]?.description
+              ? header[0].description
+              : DEFAULT_HEADER.description
+          }
+        />
+
+        <meta
+          property="og:title"
+          content={header?.[1]?.title ? header[1].title : DEFAULT_HEADER.title}
+        />
+
+        <meta
+          property="og:description"
+          content={
+            header?.[0]?.description
+              ? header[0].description
+              : DEFAULT_HEADER.description
+          }
+        />
         {header?.[0]?.image ? (
           <link rel="preload" as="image" href={urlFor(header[0].image).url()} />
         ) : null}
         <meta property="twitter:card" content="summary_large_image" />
         <link rel="icon" href="/logo.png" />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'} />
+        <link
+          rel="canonical"
+          href={process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"}
+        />
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
             "@type": "Person",
-            "name": "${(header?.[0]?.title || '').replace(/"/g, '')}",
-            "jobTitle": "${(header?.[0]?.innerSubTitle || '').replace(/"/g, '')}",
-            "url": "${process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'}"
+            "name": "${(header?.[0]?.title || "").replace(/"/g, "")}",
+            "jobTitle": "${(header?.[0]?.innerSubTitle || "").replace(
+              /"/g,
+              ""
+            )}",
+            "url": "${
+              process.env.NEXT_PUBLIC_SITE_URL || "https://example.com"
+            }"
           }`}
         </script>
       </Head>
@@ -60,7 +94,7 @@ export default function Home({
         />
         <Projects projects={projects} />
         <Contact contactDetails={contactDetails?.[0]} />
-        <Chatbot/>
+        <Chatbot />
       </div>
     </>
   );
@@ -73,18 +107,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const header = await fetchQuery(`*[_type == "header"]`);
   const contactDetails = await fetchQuery(`*[_type == "personalInformation"]`);
   const servicesData = await fetchQuery(`*[_type == "services"]`);
-
-  // Debug logs: surface counts to the build output so we can verify what Sanity returns
-  // (remove these logs after diagnosis)
-  // eslint-disable-next-line no-console
-  console.log("Sanity fetch counts:", {
-    about: Array.isArray(aboutData) ? aboutData.length : 0,
-    skills: Array.isArray(skillsData) ? skillsData.length : 0,
-    projects: Array.isArray(projects) ? projects.length : 0,
-    header: Array.isArray(header) ? header.length : 0,
-    contactDetails: Array.isArray(contactDetails) ? contactDetails.length : 0,
-    services: Array.isArray(servicesData) ? servicesData.length : 0,
-  });
 
   return {
     props: {

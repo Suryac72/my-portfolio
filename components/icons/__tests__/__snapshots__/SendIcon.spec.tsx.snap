@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SendIcon Component renders correctly 1`] = `
+<svg
+  fill="none"
+  height="20"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  stroke-width="2"
+  viewBox="0 0 24 24"
+  width="20"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <line
+    x1="22"
+    x2="11"
+    y1="2"
+    y2="13"
+  />
+  <polygon
+    points="22 2 15 22 11 13 2 9 22 2"
+  />
+</svg>
+`;
