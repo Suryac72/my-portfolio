@@ -46,5 +46,5 @@ jobs:
         NEXT_PUBLIC_SANITY_DATASET: {{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
         PINECONE_API_KEY: {{ secrets.PINECONE_API_KEY }}
         PINECONE_INDEX: {{ secrets.PINECONE_INDEX }}
-        GROQ_MODEL_NAME: "llama-3.1-8b-instant"
+        GROQ_MODEL_NAME: {{ secrets.GROQ_MODEL_NAME }}
         HUGGINEFACEHUB_API_KEY: {{ secrets.HUGGINEFACEHUB_API_KEY }}
