@@ -18,8 +18,15 @@ export const CustomCursor: React.FC = () => {
     const updateCursor = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
 
-      // Check if hovering over clickable element
       const target = e.target as HTMLElement;
+
+      // FIX: Check if target exists and has classList property
+      // e.target could be Window or Document which don't have classList
+      if (!target || !target.classList) {
+        setIsPointer(false);
+        return;
+      }
+
       const isClickable =
         target.tagName === "A" ||
         target.tagName === "BUTTON" ||
@@ -48,8 +55,10 @@ export const CustomCursor: React.FC = () => {
     };
   }, []);
 
-  // Don't render until mounted on client
-  if (!isMounted || isHidden) return null;
+  // Move the Desktop check here to ensure we return null 
+  // if mounted but not desktop.
+  const isDesktopCheck = typeof window !== 'undefined' && window.innerWidth > 768;
+  if (!isMounted || isHidden || !isDesktopCheck) return null;
 
   return (
     <>

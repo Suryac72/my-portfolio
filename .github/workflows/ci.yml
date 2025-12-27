@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ release-3-0/portfolio, release-2-0/portfolio, master ]
+  pull_request:
+    branches: [ release-3-0/portfolio, release-2-0/portfolio, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run Unit Tests with Coverage
+        run: npm test
+        env:
+          # ✅ Mock env vars for CI tests
+          NEXT_PUBLIC_SANITY_PROJECT_ID: test
+          NEXT_PUBLIC_SANITY_DATASET: test
+          PINECONE_API_KEY: test
+          GROQ_API_KEY: test
+
+      - name: Build
+        run: npm run build
+        env:
+          # ✅ REAL secrets for build
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX: ${{ secrets.PINECONE_INDEX }}
+          GROQ_MODEL_NAME: ${{ secrets.GROQ_MODEL_NAME }}
+          HUGGINGFACEHUB_API_KEY: ${{ secrets.HUGGINGFACEHUB_API_KEY }}
